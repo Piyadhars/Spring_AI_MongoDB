@@ -43,8 +43,6 @@ public class APIMongoController {
     @PutMapping("/api/employee/{id}")
     public ResponseEntity<String> updatedetail(@PathVariable String id, @RequestBody Employee emp) {
         List<Employee> details = new ArrayList<>();
-        int a=0;
-        int b=0;
         details = repo.findAll();
         List<String> idlist = new ArrayList<>();
         for (Employee e : details) {
@@ -62,13 +60,11 @@ public class APIMongoController {
             if((emp.age != null ) && (!tell.equals(emp.age))) {
                 result.get().age = emp.age;
                 repo.save(result.get());
-                a=1;
                 return ResponseEntity.status(HttpStatus.OK).body("Updated the age");
             }
             if ((emp.name != null)&&(!result.get().name.equals(emp.name))){
             result.get().name = emp.name;
             repo.save(result.get());
-            b=1;
             return ResponseEntity.status(HttpStatus.OK).body("Updated the name");
             }
             else{
